@@ -1,0 +1,182 @@
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div id="page-content" class="single-page">
+        <div class="container">
+                <div class="row">
+                        <div class="col-lg-12">
+                                <ul class="breadcrumb">
+                                    <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+                                 <!--	<li><a href="index.html">Home111</a></li>
+                                        <li><a href="category.html">Category : Mobile</a></li>-->
+                                </ul>
+                        </div>
+                </div>
+
+               <div class="row">
+                        <div id="main-content" class="col-md-8">
+                            
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="heading"><h2>精品推荐</h2></div>
+                                                <div class="products">
+                                                    
+                                                    <!--{foreach from=$best_goods item=goods}-->
+                                                        <div class="col-lg-4 col-md-4 col-xs-12">
+                                                                <div class="product">
+                                                                        <div class="image"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a></div>
+                                                                        <div class="buttons">
+                                                                                <a class="btn cart" href="javascript:addToCart({$goods.id})"><span class="glyphicon glyphicon-shopping-cart"></span>{$goods.id}</a>
+                                                                                <a class="btn wishlist" href="javascript:collect({$goods.goods_id});"><span class="glyphicon glyphicon-heart"></span>{$lang.favourable_goods}</a>
+                                                                                <a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
+                                                                        </div>
+                                                                        <div class="caption">
+                                                                                <div class="name"><h3><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></h3></div>
+                                                                                <div class="price">{$goods.shop_price}<span></span></div>
+                                                                                <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                   <!--{/foreach}-->
+                                                   
+                                                </div>
+                                        </div>
+                                </div>
+                            
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="heading"><h2>商品列表</h2></div>
+                                                <div class="products">
+                                                    
+                                                    <!--{foreach from=$goods_list item=goods}-->
+                                                        <div class="col-lg-4 col-md-4 col-xs-12">
+                                                                <div class="product">
+                                                                        <div class="image"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a></div>
+                                                                        <div class="buttons">
+                                                                                <a class="btn cart" href="javascript:addToCart({$goods.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span>{$lang.btn_buy}</a>
+                                                                                <a class="btn wishlist" href="javascript:collect({$goods.goods_id})"><span class="glyphicon glyphicon-heart"></span>{$lang.btn_collect}</a>
+                                                                                <a class="btn compare" href="javascript:;" ><span class="glyphicon glyphicon-transfer"></span>{$lang.compare}</a>
+                                                                        </div>
+                                                                        <div class="caption">
+                                                                                <div class="name"><h3><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a></h3></div>
+                                                                                <div class="price">{$goods.shop_price}<span></span></div>
+                                                                                <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                   <!--{/foreach}-->
+                                                   
+                                                </div>
+                                        </div>
+                                </div>
+                                   
+                                <div class="row text-center">
+                                        <ul class="pagination">
+                                            <!--{foreach from=$pager.page_number key=key item=item}-->
+                                              <!-- {if $pager.page eq $key} -->
+                                              <li class="active"><span class="page_now">{$key}</span></li>
+                                              <!-- {else} -->
+                                              <li ><a href="{$item}">{$key}</a></li>
+                                              <!-- {/if} -->
+                                            <!--{/foreach}-->
+                                        </ul>
+                                </div>
+                        </div>
+                   
+                        <div id="sidebar" class="col-md-4">
+                                <div class="widget wid-categories">
+                                        <div class="heading"><h4>商品分类</h4></div>
+                                        <div class="content">
+                                                <ul>
+                                                     <!--{foreach from=$categories item=cat}-->
+                                                       <li><a href="{$cat.url}">{$cat.name|escape:html}</a></li>
+                                                     <!--{/foreach}--> 
+                                                </ul>
+                                        </div>
+                                </div>
+
+                                <div class="widget wid-type">
+                                        <div class="heading"><h4>外观样式</h4></div>
+                                        <div class="content">
+                                                <select>
+                                                     <!--{foreach from=$filter_attr_list item=filter_attr}-->
+                                                     <!--{foreach from=$filter_attr.attr_list item=attr}-->
+                                                    <option value="EL" selected>{$attr.attr_value}</option>
+                                                    <!--{/foreach}-->
+                                                    <!--{/foreach}-->
+
+                                                </select>
+                                        </div>
+                                </div>
+
+                                <div class="widget wid-discouts">
+                                        <div class="heading"><h4>优惠专区</h4></div>
+                                        <div class="content">
+                                             <!--{foreach from=$price_grade item=grade}-->
+                                                <!-- {if $grade.selected} -->
+                                                <label class="checkbox"><input type="checkbox" name="discount" checked=""><span>{$grade.price_range}</span></label>
+                                                <!-- {else} -->
+                                                <label class="checkbox"><input type="checkbox" name="discount"><a href="{$grade.url}">{$grade.price_range}</a> </label> 
+                                                <!-- {/if} -->
+                                            <!--{/foreach}-->
+                                               
+                                        </div>
+                                </div>
+
+                                <div class="widget wid-brand">
+                                        <div class="heading"><h4>品牌</h4></div>
+                                        <div class="content">
+                                      <!--{foreach from=$brands item=brand}-->
+					<!-- {if $brand.selected} -->
+                                        <label class="checkbox"><input type="checkbox" name="brand"><span>{$brand.brand_name}</span></label>
+					<!-- {else} -->
+                                        <label class="checkbox"><input type="checkbox" name="brand"><a href="{$brand.url}">{$brand.brand_name}</a></label>
+					<!-- {/if} -->
+				      <!--{/foreach}-->
+
+                                        </div>
+                                </div>
+
+                                <div class="widget wid-product">
+                                        <div class="heading"><h4>浏览历史</h4></div>
+                                        <div class="content">
+                                                {insert name='history'}
+                                        </div>
+                                </div>
+                        </div>
+              </div>
+            
+        </div>
+</div>	
+
+
+ <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+  {insert_scripts files='common.js,global.js,compare.js'}
+ {insert_scripts files='transport.js'}
+ <script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<script type="text/javascript">
+window.onload = function()
+{
+  Compare.init();
+  fixpng();
+}
+{foreach from=$lang.compare_js item=item key=key}
+{if $key neq 'button_compare'}
+var {$key} = "{$item}";
+{else}
+var button_compare = '';
+{/if}
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>

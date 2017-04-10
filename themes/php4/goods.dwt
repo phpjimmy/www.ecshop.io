@@ -1,0 +1,274 @@
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div id="page-content" class="single-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="breadcrumb">
+                                           <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+					</ul>
+				</div>
+			</div>
+                    
+			<div class="row">
+				<div id="main-content" class="col-md-8">
+					<div class="product">
+                                            
+						<div class="col-md-6">
+							<div class="image">
+                                                                <a href="javascript:;" onclick="window.open('gallery.php?id={$goods.goods_id}'); return false;">
+                                                                    <img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" />
+                                                                </a>
+								<div class="image-more">
+									 <ul class="row">
+                                                                            <!-- {foreach from=$pictures item=picture}-->
+                                                                              <li style="float: left"><a href="gallery.php?id={$id}&amp;img={$picture.img_id}" target="_blank">
+                                                                                    <img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}" class="B_blue" />
+                                                                              </a></li>
+                                                                            <!--{/foreach}-->
+									</ul>
+								</div>
+							</div>
+						</div>
+                                            
+						<div class="col-md-6">
+							<div class="caption">
+                                                            <form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+								<div class="name"><h3>{$goods.goods_style_name}</h3></div>
+								<div class="info">
+									<ul>
+										<li>{$lang.goods_brand}<a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a></li>
+										<li>{$lang.goods_sn}{$goods.goods_sn}</li>
+                                                                                <li>{$lang.goods_number}{$goods.goods_number}</li>
+                                                                                <li>{$lang.market_price}{$goods.market_price}</li>
+                                                                                <li>{$lang.shop_price}{$goods.shop_price}</li>
+									</ul>
+								</div>
+								<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+								
+                                                                 <!-- {* 开始循环所有可选属性 *} -->
+                                                                  <!-- {foreach from=$specification item=spec key=spec_key} -->
+                                                                  <li class="padd loop">
+                                                                  <strong>{$spec.name}:</strong><br />
+                                                                    <!-- {* 判断属性是复选还是单选 *} -->
+                                                                                <!-- {if $spec.attr_type eq 1} -->
+                                                                                  <!-- {if $cfg.goodsattr_style eq 1} -->
+                                                                                    <!-- {foreach from=$spec.values item=value key=key} -->
+                                                                                    <label for="spec_value_{$value.id}">
+                                                                                    <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
+                                                                                    {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                                                                                    <!-- {/foreach} -->
+                                                                                    <input type="hidden" name="spec_list" value="{$key}" />
+                                                                                    <!-- {else} -->
+                                                                                    <select name="spec_{$spec_key}" onchange="changePrice()">
+                                                                                      <!-- {foreach from=$spec.values item=value key=key} -->
+                                                                                      <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                                                                                      <!-- {/foreach} -->
+                                                                                    </select>
+                                                                                    <input type="hidden" name="spec_list" value="{$key}" />
+                                                                                  <!-- {/if} -->
+                                                                                <!-- {else} -->
+                                                                                  <!-- {foreach from=$spec.values item=value key=key} -->
+                                                                                  <label for="spec_value_{$value.id}">
+                                                                                  <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                                                                                  {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                                                                                  <!-- {/foreach} -->
+                                                                                  <input type="hidden" name="spec_list" value="{$key}" />
+                                                                                <!-- {/if} -->
+                                                                 </li>
+                                                                  <!-- {/foreach} -->
+                                                                 <!-- {* 结束循环可选属性 *} -->
+                                                                
+                                                                <div class="well">
+                                                                     <label>{$lang.number}：</label> <input name="number" type="text" id="number" value="1" size="2" onblur="changePrice()" />
+                                                                     <a href="javascript:addToCart({$goods.goods_id})" class="btn btn-2 ">添加到购物车</a>
+                                                                </div>
+						            </form>
+							</div>
+						</div>
+                                            
+						<div class="clear"></div>
+					</div>	
+					<div class="product-desc">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#description">商品描述</a></li>
+							<li><a href="#review">用户评论</a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="description" class="tab-pane fade in active">
+								<h4>Sample Lorem Ipsum Text</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ante. Mauris eleifend, quam a vulputate dictum, massa quam dapibus leo, eget vulputate orci purus ut lorem. In fringilla mi in ligula. Pellentesque aliquam quam vel dolor. Nunc adipiscing. Sed quam odio, tempus ac, aliquam molestie, varius ac, tellus. Vestibulum ut nulla aliquam risus rutrum interdum. Pellentesque lorem. Curabitur sit amet erat quis risus feugiat viverra. Pellentesque augue justo, sagittis et, lacinia at, venenatis non, arcu. Nunc nec libero. In cursus dictum risus. Etiam tristique nisl a</p>
+								<h4>Sample Lorem Ipsum Text</h4>
+								<p>Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque aliquet lacus vitae pede. Nullam mollis dolor ac nisi. Phasellus sit amet urna. Praesent pellentesque sapien sed lacus. Donec lacinia odio in odio. In sit amet elit. Maecenas gravida interdum urna. Integer pretium, arcu vitae imperdiet facilisis, elit tellus tempor nisi, vel feugiat ante velit sit amet mauris. Vivamus arcu. Integer pharetra magna ac lacus. Aliquam vitae sapien in nibh vehicula auctor. Suspendisse leo mauris, pulvinar sed, tempor et, consequat ac, lacus. Proin velit. Nulla semper lobortis mauris. Duis urna erat, ornare et, imperdiet eu, suscipit sit amet, massa. Nulla nulla nisi, pellentesque at, egestas quis, fringilla eu, diam.</p>
+							</div>
+                                                    
+							<div id="review" class="tab-pane fade">
+							  <div class="review-text">
+								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							  </div>
+							  <div class="review-form">
+								<h4>写评论</h4>
+								<form name="form1" id="ff" method="post" action="review.php">
+									<label>
+									<span>输入你的名字:</span>
+									<input type="text"  name="name" id="name" required>
+									</label>
+									<label>
+									<span>你的信息:</span>
+									<textarea name="message" id="message"></textarea>
+									</label>
+									<div class="text-right">
+										<input class="btn btn-default" type="reset" name="reset" value="Reset">
+										<input class="btn btn-default" type="submit" name="Submit" value="Submit">
+									</div>
+								</form>
+							  </div>
+							</div>
+                                                    
+						</div>
+					</div>
+                                    
+					<div class="product-related">
+						<div class="heading"><h2>相关商品</h2></div>
+						<div class="products">
+                                                    <!--{foreach from=$bought_goods item=bought_goods_data}-->
+							<div class="col-lg-4 col-md-4 col-xs-12">
+								<div class="product">
+									<div class="image"><a href="{$bought_goods_data.url}"><img src="{$bought_goods_data.goods_thumb}" alt="{$bought_goods_data.goods_name}"  class="goodsimg" /></a></div>
+									<div class="buttons">
+										<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+										<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
+										<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
+									</div>
+									<div class="caption">
+										<div class="name"><h3><a href="{$bought_goods_data.url}" title="{$bought_goods_data.goods_name}">{$bought_goods_data.short_name}</a></h3></div>
+										<div class="price">{$bought_goods_data.shop_price}<span></span></div>
+										<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+									</div>
+								</div>
+							</div>
+                                                   <!-- {/foreach} -->
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+                            
+				<div id="sidebar" class="col-md-4">
+                                     <div class="widget wid-categories">
+                                        <div class="heading"><h4>商品分类</h4></div>
+                                        <div class="content">
+                                                <ul>
+                                                     <!--{foreach from=$categories item=cat}-->
+                                                       <li><a href="{$cat.url}">{$cat.name|escape:html}</a></li>
+                                                     <!--{/foreach}--> 
+                                                </ul>
+                                        </div>
+                                </div>
+
+                                     <div class="widget wid-type">
+                                        <div class="heading"><h4>外观样式</h4></div>
+                                        <div class="content">
+                                                <select>
+                                                     <!--{foreach from=$filter_attr_list item=filter_attr}-->
+                                                     <!--{foreach from=$filter_attr.attr_list item=attr}-->
+                                                    <option value="EL" selected>{$attr.attr_value}</option>
+                                                    <!--{/foreach}-->
+                                                    <!--{/foreach}-->
+
+                                                </select>
+                                        </div>
+                                </div>
+
+                                     <div class="widget wid-discouts">
+                                        <div class="heading"><h4>优惠专区</h4></div>
+                                        <div class="content">
+                                             <!--{foreach from=$price_grade item=grade}-->
+                                                <!-- {if $grade.selected} -->
+                                                <label class="checkbox"><input type="checkbox" name="discount" checked=""><span>{$grade.price_range}</span></label>
+                                                <!-- {else} -->
+                                                <label class="checkbox"><input type="checkbox" name="discount"><a href="{$grade.url}">{$grade.price_range}</a> </label> 
+                                                <!-- {/if} -->
+                                            <!--{/foreach}-->
+                                               
+                                        </div>
+                                     </div>
+
+                                     <div class="widget wid-brand">
+                                        <div class="heading"><h4>品牌</h4></div>
+                                        <div class="content">
+                                      <!--{foreach from=$brands item=brand}-->
+					<!-- {if $brand.selected} -->
+                                        <label class="checkbox"><input type="checkbox" name="brand"><span>{$brand.brand_name}</span></label>
+					<!-- {else} -->
+                                        <label class="checkbox"><input type="checkbox" name="brand"><a href="{$brand.url}">{$brand.brand_name}</a></label>
+					<!-- {/if} -->
+				      <!--{/foreach}-->
+
+                                        </div>
+                                </div>
+
+                                     <div class="widget wid-product">
+                                        <div class="heading"><h4>浏览历史</h4></div>
+                                        <div class="content">
+                                                {insert name='history'}
+                                        </div>
+                                </div>
+                               </div>
+		        </div>
+		</div>
+</div>	
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+<script type="text/javascript">
+var goods_id = {$goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+var now_time = {$now_time};
+
+<!-- {literal} -->
+onload = function(){
+  changePrice();
+  fixpng();
+  try { onload_leftTime(); }
+  catch (e) {}
+}
+
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+<!-- {/literal} -->
+</script>
+</html>
+
+
+
